@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static Flowframes.AvProcess;
-using static NmkdUtils.StringExtensions;
+using static Flowframes.ExtensionMethods;
 
 namespace Flowframes.Media
 {

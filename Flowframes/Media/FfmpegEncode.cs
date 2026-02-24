@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using static NmkdUtils.StringExtensions;
+using static Flowframes.ExtensionMethods;
 using static Flowframes.AvProcess;
 using Padding = Flowframes.Data.Padding;
 using Utils = Flowframes.Media.FfmpegUtils;

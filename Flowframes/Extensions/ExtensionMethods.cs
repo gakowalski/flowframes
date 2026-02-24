@@ -228,6 +228,15 @@ namespace Flowframes
             return str?.Split(new string[] { trimStr }, StringSplitOptions.None);
         }
 
+        public static bool MatchesWildcard(this string str, string wildcard)
+        {
+            if (str == null || wildcard == null)
+                return false;
+
+            var pattern = "^" + Regex.Escape(wildcard).Replace("\\*", ".*").Replace("\\?", ".") + "$";
+            return Regex.IsMatch(str, pattern, RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        }
+
         public static int RoundMod(this int n, int mod = 2)     // Round to a number that's divisible by 2 (for h264 etc)
         {
             int a = (n / 2) * 2;    // Smaller multiple
@@ -367,7 +376,7 @@ namespace Flowframes
             if (s == null)
                 return s;
 
-            return s.Lower();
+            return s.ToLowerInvariant();
         }
 
         public static string Upper(this string s)

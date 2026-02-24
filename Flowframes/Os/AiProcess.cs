@@ -14,7 +14,7 @@ using Paths = Flowframes.IO.Paths;
 using Flowframes.Media;
 using System.Drawing;
 using Flowframes.Utilities;
-using static NmkdUtils.StringExtensions;
+using static Flowframes.ExtensionMethods;
 
 namespace Flowframes.Os
 {

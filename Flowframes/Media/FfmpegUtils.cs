@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using static Flowframes.Data.Enums.Encoding;
 using static Flowframes.Media.GetVideoInfo;
 using Stream = Flowframes.Data.Streams.Stream;
-using static NmkdUtils.StringExtensions;
+using static Flowframes.ExtensionMethods;
 
 namespace Flowframes.Media
 {
