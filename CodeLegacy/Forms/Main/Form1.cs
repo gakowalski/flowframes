@@ -35,7 +35,6 @@ namespace Flowframes.Forms.Main
 
         public bool ShowModelDownloader = false;
 
-        private Enums.VfrMode prevVfrMode = (Enums.VfrMode)(-1);
         private ControlTextResizer _ctrlTextResizer;
 
         protected override CreateParams CreateParams
@@ -188,9 +187,9 @@ namespace Flowframes.Forms.Main
             {
                 // Task.Run(() => Updater.UpdateModelList());
                 StartupChecks.GpuCheck();
-                Task.Run(() => Updater.AsyncUpdateCheck());
-                Task.Run(() => GetWebInfo.LoadNews(newsLabel));
-                Task.Run(() => GetWebInfo.LoadPatronListCsv(patronsLabel));
+                _ = Task.Run(() => Updater.AsyncUpdateCheck());
+                _ = Task.Run(() => GetWebInfo.LoadNews(newsLabel));
+                _ = Task.Run(() => GetWebInfo.LoadPatronListCsv(patronsLabel));
                 await Servers.InitAsync();
                 await StartupChecks.SymlinksCheck();
                 await HwEncCheck.DetectHwEncoders();
@@ -700,7 +699,7 @@ namespace Flowframes.Forms.Main
 
                 trimCombox.SelectedIndex = 0;
 
-                MainUiFunctions.InitInput(outputTbox, inputTbox, fpsInTbox, start);
+                _ = MainUiFunctions.InitInput(outputTbox, inputTbox, fpsInTbox, start);
             }
         }
 
@@ -750,7 +749,7 @@ namespace Flowframes.Forms.Main
             }
         }
 
-        private async void updateBtn_Click(object sender, EventArgs e)
+        private void updateBtn_Click(object sender, EventArgs e)
         {
             new UpdaterForm().ShowDialog();
         }

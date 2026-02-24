@@ -603,6 +603,8 @@ namespace Flowframes.IO
 
         public static async Task<string> GetCurrentExportFilename(bool fpsLimit, bool isImgSeq = false, bool includeExt = true)
         {
+            await Task.CompletedTask;
+
             InterpSettings curr = Interpolate.currentSettings;
             float fps = fpsLimit ? curr.outFpsResampled.Float : curr.outFps.Float;
 

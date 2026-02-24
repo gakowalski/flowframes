@@ -109,6 +109,8 @@ namespace Flowframes
 
         public static async Task<long> GetDurationMs(string inputFile, MediaFile mediaFile, bool demuxInsteadOfPacketTs = false, bool allowDurationFromMetadata = true)
         {
+            await Task.CompletedTask;
+
             if (mediaFile.IsDirectory)
                 return 0;
 

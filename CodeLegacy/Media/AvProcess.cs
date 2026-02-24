@@ -15,11 +15,9 @@ namespace Flowframes
         public static Process lastAvProcess;
         public static Stopwatch timeSinceLastOutput = new Stopwatch();
 
-        public static string lastOutputFfmpeg;
+        public static string lastOutputFfmpeg = "";
 
         public enum LogMode { Visible, OnlyLastLine, Hidden }
-        static LogMode currentLogMode;
-        static bool showProgressBar;
 
         static readonly string defLogLevel = "warning";
 
@@ -84,6 +82,7 @@ namespace Flowframes
             if (progressBar)
                 Program.mainForm.SetProgress(0);
 
+            lastOutputFfmpeg = processOutput;
             return processOutput;
         }
 
@@ -110,6 +109,7 @@ namespace Flowframes
             ffmpeg.PriorityClass = ProcessPriorityClass.BelowNormal;
             string output = ffmpeg.StandardOutput.ReadToEnd();
             ffmpeg.WaitForExit();
+            lastOutputFfmpeg = output;
             Logger.Log($"Synchronous ffmpeg output:\n{output}", true, false, "ffmpeg", toConsole: Cli.Verbose);
             return output;
         }

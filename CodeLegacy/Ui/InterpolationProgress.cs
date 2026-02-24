@@ -24,7 +24,6 @@ namespace Flowframes.Ui
         public static bool progressPaused = false;
         public static bool progCheckRunning = false;
 
-        public static PictureBox preview;
         public static BigPreviewForm bigPreviewForm;
 
         public static void Restart ()
@@ -44,7 +43,6 @@ namespace Flowframes.Ui
             currentOutdir = outdir;
             Restart();
             Logger.Log($"Starting GetProgressByFrameAmount() loop for outdir '{currentOutdir}', target is {target} frames", true);
-            bool firstProgUpd = true;
 
             while (Program.busy)
             {
@@ -52,8 +50,6 @@ namespace Flowframes.Ui
                 {
                     // if (firstProgUpd && Program.mainForm.IsInFocus())
                     //     Program.mainForm.SetTab(Program.mainForm.previewTab.Name);
-
-                    firstProgUpd = false;
                     string lastFramePath = currentOutdir + "\\" + lastFrame.ToString("00000000") + I.currentSettings.interpExt;
 
                     if (lastFrame > 1)

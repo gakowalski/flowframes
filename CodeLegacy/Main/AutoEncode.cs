@@ -139,7 +139,7 @@ namespace Flowframes.Main
                             if (Interpolate.canceled) return;
 
                             if (aiRunning && Config.GetInt(Config.Key.autoEncMode) == 2)
-                                Task.Run(() => DeleteOldFramesAsync(interpFramesPath, frameLinesToEncode));
+                                _ = Task.Run(() => DeleteOldFramesAsync(interpFramesPath, frameLinesToEncode));
 
                             if (Interpolate.canceled) return;
 
@@ -186,7 +186,7 @@ namespace Flowframes.Main
             }
         }
 
-        static async Task DeleteOldFramesAsync (string interpFramesPath, List<int> frameLinesToEncode)
+        static Task DeleteOldFramesAsync (string interpFramesPath, List<int> frameLinesToEncode)
         {
             if(debug)
                 Logger.Log("[AE] Starting DeleteOldFramesAsync.", true, false, "ffmpeg");
@@ -207,6 +207,8 @@ namespace Flowframes.Main
 
             if (debug)
                 Logger.Log("[AE] DeleteOldFramesAsync finished in " + FormatUtils.TimeSw(sw), true, false, "ffmpeg");
+
+            return Task.CompletedTask;
         }
 
         static bool FrameIsStillNeeded (string frameName, int frameIndex)

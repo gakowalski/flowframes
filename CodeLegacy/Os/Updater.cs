@@ -83,7 +83,7 @@ namespace Flowframes.Os
             }
         }
 
-        public static async Task AsyncUpdateCheck()
+        public static Task AsyncUpdateCheck()
         {
             Version installed = GetInstalledVer();
             Version latestPat = GetLatestVer(true);
@@ -103,12 +103,13 @@ namespace Flowframes.Os
                 windowTitle += $"[{gpus}]";
 
             Program.mainForm.Invoke(() => Program.mainForm.Text = windowTitle);
+            return Task.CompletedTask;
         }
 
-        public static async Task UpdateModelList()
+        public static Task UpdateModelList()
         {
             if (!Config.GetBool("fetchModelsFromRepo", false))
-                return;
+            return Task.CompletedTask;
 
             foreach (AiInfo ai in Implementations.NetworksAll)
             {
@@ -147,6 +148,8 @@ namespace Flowframes.Os
                     Logger.Log($"{e.Message}\n{e.StackTrace}", true);
                 }
             }
+
+            return Task.CompletedTask;
         }
     }
 }

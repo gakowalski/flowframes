@@ -305,7 +305,6 @@ namespace Flowframes.Os
         static async Task RunRifeNcnnProcess(string inPath, float factor, string outPath, string mdl)
         {
             Directory.CreateDirectory(outPath);
-            string logFileName = "rife-ncnn-log";
             Process rifeNcnn = OsUtils.NewProcess(true);
             AiStarted(rifeNcnn, 1500, inPath);
             SetProgressCheck(outPath, factor);

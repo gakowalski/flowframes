@@ -224,7 +224,7 @@ namespace Flowframes.Magick
             return GetDifference(GetImage(img1Path), GetImage(img2Path));
         }
 
-        public static async Task CreateDupesFile(string framesPath, string ext)
+        public static Task CreateDupesFile(string framesPath, string ext)
         {
             bool debug = true; Config.GetBool("dupeScanDebug", false);
 
@@ -259,6 +259,7 @@ namespace Flowframes.Magick
 
             // string tempDir = 
             // File.WriteAllText(Path.Combine(framesPath.GetParentDir(), "dupes.json"), frames.ToJson(true));
+            return Task.CompletedTask;
         }
 
         public static async Task CreateFramesFileVideo(string videoPath, bool loop)

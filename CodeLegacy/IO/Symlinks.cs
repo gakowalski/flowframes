@@ -34,15 +34,13 @@ namespace Flowframes.IO
             sw.Restart();
             ParallelOptions opts = new ParallelOptions() { MaxDegreeOfParallelism = maxThreads };
 
-            Task forEach = Task.Run(async () => Parallel.ForEach(pathsLinkTarget, opts, pair =>
+            await Task.Run(() => Parallel.ForEach(pathsLinkTarget, opts, pair =>
             {
                 bool success = CreateSymbolicLink(pair.Key, pair.Value, Flag.Unprivileged);
 
                 if (debug)
                     Logger.Log($"Created Symlink - Source: '{pair.Key}' - Target: '{pair.Value}' - Sucess: {success}", true);
             }));
-
-            while (!forEach.IsCompleted) await Task.Delay(1);
             Logger.Log($"Created {pathsLinkTarget.Count} symlinks in {FormatUtils.TimeSw(sw)}", true);
         }
 

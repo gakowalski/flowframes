@@ -96,10 +96,6 @@ namespace Flowframes.Ui
                 return new DialogResult();
             }
 
-            MessageBoxIcon icon = MessageBoxIcon.Information;
-            if (type == MessageType.Warning) icon = MessageBoxIcon.Warning;
-            else if (type == MessageType.Error) icon = MessageBoxIcon.Error;
-
             var msgForm = new MessageForm(text, type, monospace: monospace) { TopMost = true };
             Program.mainForm.Invoke(() => msgForm.ShowDialog());
             return DialogResult.OK;

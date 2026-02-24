@@ -118,7 +118,7 @@ namespace Flowframes.Media
 
         public static async Task ImportImagesCheckCompat(string inPath, string outPath, bool alpha, Size size, bool showLog, string format)
         {
-            bool compatible = await Task.Run(async () => { return AreImagesCompatible(inPath, Config.GetInt(Config.Key.maxVidHeight)); });
+            bool compatible = await Task.Run(() => AreImagesCompatible(inPath, Config.GetInt(Config.Key.maxVidHeight)));
 
             if (!alpha && compatible)
             {
@@ -154,7 +154,7 @@ namespace Flowframes.Media
             else
             {
                 Logger.Log($"Symlink Import disabled, copying input frames...", true);
-                await Task.Run(async () =>
+                await Task.Run(() =>
                 {
                     foreach (KeyValuePair<string, string> moveFromToPair in moveFromTo)
                         File.Copy(moveFromToPair.Key, moveFromToPair.Value);

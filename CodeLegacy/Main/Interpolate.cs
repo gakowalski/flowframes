@@ -320,7 +320,7 @@ namespace Flowframes
 
             try
             {
-                await Task.Run(async () => { Directory.Delete(currentSettings.tempFolder, true); });
+                await Task.Run(() => { Directory.Delete(currentSettings.tempFolder, true); });
             }
             catch (Exception e)
             {

@@ -258,7 +258,7 @@ namespace Flowframes.Main
             }
         }
 
-        static async Task GenerateFrameLinesFloat(int sourceFrameCount, int targetFrameCount, float factor, bool sceneDetection, bool debug)
+        static Task GenerateFrameLinesFloat(int sourceFrameCount, int targetFrameCount, float factor, bool sceneDetection, bool debug)
         {
             int totalFileCount = 0;
             bool blendSceneChances = Config.GetInt(Config.Key.sceneChangeFillMode) > 0;
@@ -271,7 +271,7 @@ namespace Flowframes.Main
 
             for (int i = 0; i < targetFrameCount; i++)
             {
-                if (Interpolate.canceled) return;
+                if (Interpolate.canceled) return Task.CompletedTask;
 
                 float currentFrameTime = 1 + (step * i).Float;
                 int sourceFrameIdx = (int)Math.Floor(currentFrameTime) - 1;
@@ -329,9 +329,10 @@ namespace Flowframes.Main
             }
 
             frameFileContents[0] = String.Join("", lines);
+            return Task.CompletedTask;
         }
 
-        static async Task GenerateFrameLines(int number, int startIndex, int count, int factor, bool sceneDetection, bool debug)
+        static Task GenerateFrameLines(int number, int startIndex, int count, int factor, bool sceneDetection, bool debug)
         {
             int totalFileCount = (startIndex) * factor;
             int interpFramesAmount = factor;
@@ -341,7 +342,7 @@ namespace Flowframes.Main
 
             for (int i = startIndex; i < (startIndex + count); i++)
             {
-                if (Interpolate.canceled) return;
+                if (Interpolate.canceled) return Task.CompletedTask;
                 if (i >= frameFilesWithoutLast.Length) break;
 
                 string frameName = GetNameNoExt(frameFilesWithoutLast[i].Name);
@@ -395,6 +396,7 @@ namespace Flowframes.Main
                 lastOutFileCount = totalFileCount;
 
             frameFileContents[number] = fileContent;
+            return Task.CompletedTask;
         }
 
         static string WriteFrameWithDupes(int dupesAmount, string fileContent, int frameNum, string ext, bool debug, string debugNote = "", string forcedNote = "")

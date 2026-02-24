@@ -34,7 +34,7 @@ namespace Flowframes.Main
             Directory.CreateDirectory(Path.Combine(I.currentSettings.tempFolder, Paths.resumeDir));
             SaveState(frames);
             SaveInterpSettings();
-            SaveFilenameMap();
+            _ = SaveFilenameMap();
         }
 
         static void SaveState (int frames)

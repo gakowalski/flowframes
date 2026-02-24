@@ -17,7 +17,6 @@ namespace Flowframes.Media
     class FfmpegUtils
     {
         private readonly static FfprobeMode showStreams = FfprobeMode.ShowStreams;
-        private readonly static FfprobeMode showFormat = FfprobeMode.ShowFormat;
 
         public static List<Encoder> CompatibleHwEncoders = new List<Encoder>();
         public static bool NvencSupportsBFrames = false;
@@ -209,19 +208,19 @@ namespace Flowframes.Media
             return 0.1f;
         }
 
-        public static async Task<bool> IsSubtitleBitmapBased(string path, int streamIndex, string codec = "")
+        public static Task<bool> IsSubtitleBitmapBased(string path, int streamIndex, string codec = "")
         {
             if (codec == "ssa" || codec == "ass" || codec == "mov_text" || codec == "srt" || codec == "subrip" || codec == "text" || codec == "webvtt")
-                return false;
+                return Task.FromResult(false);
 
             if (codec == "dvdsub" || codec == "dvd_subtitle" || codec == "pgssub" || codec == "hdmv_pgs_subtitle" || codec.StartsWith("dvb_"))
-                return true;
+                return Task.FromResult(true);
 
             // If codec was not listed above, manually check if it's compatible by trying to encode it:
             //string ffmpegCheck = await GetFfmpegOutputAsync(path, $"-map 0:{streamIndex} -c:s srt -t 0 -f null -");
             //return ffmpegCheck.Contains($"encoding currently only possible from text to text or bitmap to bitmap");
 
-            return false;
+            return Task.FromResult(false);
         }
 
         public static string[] GetEncArgs(OutputSettings settings, Size res, float fps, bool forceSinglePass = false) // Array contains as many entries as there are encoding passes.

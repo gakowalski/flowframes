@@ -39,7 +39,7 @@ namespace Flowframes.Os
                 Directory.CreateDirectory(Path.Combine(Paths.GetExeDir(), testDir));
                 Directory.Delete(Path.Combine(Paths.GetExeDir(), testDir));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 UiUtils.ShowMessageBox($"Flowframes does not have permission to write to its own directory!\nPlease move it to a different folder.\n\nCurrent install directory: {Paths.GetExeDir()}", UiUtils.MessageType.Error);
                 Application.Exit();

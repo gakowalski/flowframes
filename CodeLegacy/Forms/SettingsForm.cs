@@ -15,7 +15,6 @@ namespace Flowframes.Forms
 {
     public partial class SettingsForm : CustomForm
     {
-        private bool _initialized = false;
         private AiInfo _currentAi = null;
 
         public SettingsForm(int tabIndex = 0, AiInfo currentAi = null)
@@ -38,7 +37,6 @@ namespace Flowframes.Forms
             InitServers();
             LoadSettings();
             AddTooltipClickFunction();
-            _initialized = true;
             Task.Run(() => CheckModelCacheSize());
         }
 
@@ -286,13 +284,13 @@ namespace Flowframes.Forms
         {
             ModelDownloader.DeleteAllModels();
             clearModelCacheBtn.Text = "Clear Model Cache";
-            CheckModelCacheSize();
+            _ = CheckModelCacheSize();
         }
 
         private void modelDownloaderBtn_Click(object sender, EventArgs e)
         {
             new ModelDownloadForm().ShowDialog();
-            CheckModelCacheSize();
+            _ = CheckModelCacheSize();
         }
 
         private void autoEncMode_SelectedIndexChanged(object sender, EventArgs e)
